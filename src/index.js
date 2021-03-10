@@ -1,7 +1,8 @@
 const header = document.querySelector('header')
 const ul = document.querySelector('ul')
 const headerName = header.querySelector('h1')
-const profileId = 2
+const profileId = 1
+const movieSearchForm = document.querySelector('#movie-search-form')
 
 function renderProfile(profileId) {
     fetch(`http://localhost:3000/users/${profileId}`)
@@ -16,6 +17,7 @@ function renderProfile(profileId) {
             header.append(netflixLogo)
             netflixLogo.addEventListener('click', event => {
                 event.preventDefault()
+                ul.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.netflix == true) {
                         const li = document.createElement('li')
@@ -34,6 +36,7 @@ function renderProfile(profileId) {
             header.append(huluLogo)
             huluLogo.addEventListener('click', event => {
                 event.preventDefault()
+                ul.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.hulu == true) {
                         const li = document.createElement('li')
@@ -52,6 +55,7 @@ function renderProfile(profileId) {
             header.append(hboLogo)
             hboLogo.addEventListener('click', event => {
                 event.preventDefault()
+                ul.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.hbo == true) {
                         const li = document.createElement('li')
@@ -70,6 +74,7 @@ function renderProfile(profileId) {
             header.append(disneyLogo)
             disneyLogo.addEventListener('click', event => {
                 event.preventDefault()
+                ul.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.disney == true) {
                         const li = document.createElement('li')
@@ -88,6 +93,7 @@ function renderProfile(profileId) {
             header.append(amazonLogo)
             amazonLogo.addEventListener('click', event => {
                 event.preventDefault()
+                ul.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.amazon == true) {
                         const li = document.createElement('li')
@@ -136,5 +142,20 @@ function renderMovie(movie) {
 //             console.log(userMovie.movie.title)
 //     }})
 // })}
+
+movieSearchForm.addEventListener('input', event => {
+    event.preventDefault()
+    fetch('http://localhost:3000/movies')
+    .then(response => response.json())
+    .then(allMovies => {
+        allMovies.filter(movieOption => {
+         const filteredMovie = movieOption.title.includes(event.target.value.toLowerCase)
+         console.log(filteredMovie)
+        })
+    })
+})
+
+
 renderProfile(profileId)
-renderMovies()
+// renderMovies()
+// ❤️ 👎 ❌
