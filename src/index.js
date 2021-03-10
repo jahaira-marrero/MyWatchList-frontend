@@ -72,7 +72,7 @@ function renderProfile(profileId) {
 
                         deleteBtn.addEventListener('click', event => {
                             const cardDiv = event.target.parentNode
-                            fetch(`http://localhost:3000/user_movie/${event.target.parentNode.dataset.id}`, {
+                            fetch(`http://localhost:3000/users/${event.target.parentNode.dataset.id}`, {
                                 method: "DELETE",
                                 headers: {
                                     "Content-Type": "application/json"
