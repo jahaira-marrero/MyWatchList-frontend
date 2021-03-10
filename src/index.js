@@ -2,6 +2,7 @@ const header = document.querySelector('header')
 const ul = document.querySelector('ul')
 const headerName = header.querySelector('h1')
 const profileId = 2
+const myMovieDiv = document.querySelector('div#movie-card-collection')
 
 function renderProfile(profileId) {
     fetch(`http://localhost:3000/users/${profileId}`)
@@ -16,12 +17,18 @@ function renderProfile(profileId) {
             header.append(netflixLogo)
             netflixLogo.addEventListener('click', event => {
                 event.preventDefault()
+                myMovieDiv.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.netflix == true) {
-                        const li = document.createElement('li')
-                        li.classList.add('netflixcard')
-                        li.textContent = userMovie.movie.title
-                        ul.append(li)
+                        const netflixDiv = document.createElement('div')
+                        netflixDiv.classList.add('netflixcard')
+                        netflixDiv.innerHTML =`<h2> ${userMovie.movie.title} </h2>
+                        <h3> Year Released: ${userMovie.movie.year} </h3>
+                        <img src ="${userMovie.movie.image}">
+                        <p> Likes: ${userMovie.movie.likes}</p>
+                        <p> Dislikes: ${userMovie.movie.dislikes}</p>
+                        `
+                        myMovieDiv.append(netflixDiv)
                     }
                 })
 
