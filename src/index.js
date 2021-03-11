@@ -5,7 +5,8 @@ const headerName = header.querySelector('h1')
 const myMovieDiv = document.querySelector('div#movie-card-collection')
 const searchForm = document.querySelector('form#movie-search-form')
 const loginForm = document.querySelector('form#login')
-let profileId = 2
+const hiddenTags = document.querySelectorAll('.hidden-before-login')
+const allLogosDiv = document.querySelector('.Logos')
 let movies = []
 let myMovies = []
 
@@ -46,10 +47,13 @@ function renderMyProfile() {
     .then(response => response.json())
     .then(userHash => {
         headerName.innerText = `Profile: ${userHash.username}`
+        allLogosDiv.className = 'after-login'
+        hiddenTags.forEach(tag => {tag.className = 'user-home-page'})
+
         renderUserLogos()
-        // getAllMovies()
-        // accessMyMovies()
-        // renderMyMovies(myMovies)
+        getAllMovies()
+        accessMyMovies()
+        renderMyMovies(myMovies)
     })
 }
 
@@ -270,12 +274,26 @@ myMovieDiv.addEventListener('click', event => {
     }
 })
 
+loginForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const usernameInput = event.target[0].value 
+    const passwordInput = event.target[1].value
+
+    fetch('http://localhost:3000/users')
+    .then(response => response.json())
+    .then(usersHash => {
+        usersHash.forEach(user => {
+            if(user.username === usernameInput && user.password === passwordInput) {
+                profileId = user.id
+                renderMyProfile()
+                loginForm.classList.add('after-login')
+            }
+        })
+        event.target.reset()
+    })
+})
 /********** Calling Functions **********/
 
-renderMyProfile()
-getAllMovies()
-
-document.addEventListener('DOMContentLoaded', () => {
-    accessMyMovies()
-    renderMyMovies(myMovies)
-})
+// renderMyProfile()
+// getAllMovies()
+// accessMyMovies()

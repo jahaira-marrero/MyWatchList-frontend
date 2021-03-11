@@ -6,27 +6,34 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body> 
-    <header>
-      <h1> Profile </h1>
+    <header class="before-login">
+      <h1> Welcome to My WatchList </h1>
+        <div class="Logos">
+          <img src="https://cdn.iconscout.com/icon/free/png-256/netflix-282224.png">
+          <img src="https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/bk8cux6dapq8qjzylfaj">
+          <img src="https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/lr6ntovb8hu36yqscb2c">
+          <img src="https://developer.asustor.com/uploadIcons/0020_999_1591957052_app_icon_Disney_plus_256.png">
+          <img src="https://apprecs.org/ios/images/app-icons/256/e5/545519333.jpg">
+        </div>
     </header>  
 
-    <form class="form" id="login">
+    <form class="before-login" id="login">
       <h1 class="form-title">Login</h1>
-      <div class="form-input-group">
+      <!-- <div class="form-input-group"> -->
           <input type="text" class="form-input" placeholder="Username or email">
-      </div>
-      <div class="form-input-group">
+      <!-- </div> -->
+      <!-- <div class="form-input-group"> -->
           <input type="password" class="form-input" placeholder="Password">
-      </div>
+      <!-- </div> -->
       <button class="form-button" type="submit">Log In</button>
   </form>
 
-  <form id="movie-search-form" class="" action="" method="">
+  <form id="movie-search-form" class="hidden-before-login" >
     <h1 class="search-form-title">Search for a Movie</h1>
-      <input id="movie-search-input" type="text" name="">
+      <input id="movie-search-input" type="text" placeholder="Search...">
   </form>
 
-  <h1> My Watch List </h1>
+  <h1 class="hidden-before-login"> My Watch List </h1>
     <div id="movie-card-collection">
     </div>
     <script type="text/javascript" src="src/index.js" defer></script>
