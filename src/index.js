@@ -206,6 +206,8 @@ searchForm.addEventListener('input', event => {
     const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(event.target.value.toLowerCase()))
     renderMovies(filteredMovies)
 })
+
+// Movies for the search
 function renderMovie(movie) {
     const div = document.createElement('div')
     div.classList.add('moviecard')
@@ -357,14 +359,4 @@ myMovieDiv.addEventListener('click', event => {
 })
 
 renderMyProfile()
-// accessMyMovies()
-// renderMyMovies()
-// renderProfile(profileId)
 getAllMovies()
-
-// function likeClick(likeButton) {
-//     likeButton.addEventListener('click', event => {
-//     console.log(event.target.dataset.id)
-
-//     })
-// }
