@@ -1,3 +1,13 @@
+h1 {
+  height: 5vh;
+  background: rgb(159, 190, 224);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 1vh;
+  font-family: sans-serif;
+}
+
 .moviecard {
     text-align: center;
     border: grey solid 1px;
@@ -13,6 +23,7 @@
   width: 13rem;
   height: 10rem;
   margin: auto;
+  font-family: sans-serif;
 }
 
 #movie-card-collection img {
@@ -20,3 +31,18 @@
   height: 10rem;
   margin: auto;
 }
+
+input[type="text"], button{
+  background-color: rgb(248, 238, 143);
+  color: rgb(10, 10, 10);
+  font-size: 18px;
+  border-radius: 6px;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="text"]{
+  width: 40rem;
+  height: 4vh;
+  font-size: 3vh;
+}
+
