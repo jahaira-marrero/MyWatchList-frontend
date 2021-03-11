@@ -1,8 +1,9 @@
 const header = document.querySelector('header')
-const ul = document.querySelector('ul')
 const headerName = header.querySelector('h1')
 const profileId = 2
 const myMovieDiv = document.querySelector('div#movie-card-collection')
+let movies = []
+const searchForm = document.querySelector('#movie-search-form')
 
 function renderProfile(profileId) {
     fetch(`http://localhost:3000/users/${profileId}`)
@@ -10,13 +11,12 @@ function renderProfile(profileId) {
     .then(userHash => {
         headerName.innerText = `Profile: ${userHash.username}`
 
-        if (userHash.netflix == true) {
+        if (userHash.netflix === true) {
             const netflixLogo = document.createElement('img')
             netflixLogo.dataset.id = 1
             netflixLogo.src = "https://cdn.iconscout.com/icon/free/png-256/netflix-282224.png"
             header.append(netflixLogo)
             netflixLogo.addEventListener('click', event => {
-                event.preventDefault()
                 myMovieDiv.innerHTML = ""
                 userHash.user_movies.forEach(userMovie => {
                     if (userMovie.movie.netflix == true) {
@@ -26,7 +26,7 @@ function renderProfile(profileId) {
                         netflixDiv.innerHTML =`<h2> ${userMovie.movie.title} </h2>
                         <h3> Year Released: ${userMovie.movie.year} </h3>
                         <img src ="${userMovie.movie.image}">
-                        <p> Likes: ${userMovie.movie.likes}</p> 
+                        <p>${userMovie.movie.likes}</p> 
                         <button class="like-btn">❤️</button> 
                         <span> Dislikes: ${userMovie.movie.dislikes}</span>
                         <button class="dislike-btn">👎🏾</button>
@@ -34,11 +34,13 @@ function renderProfile(profileId) {
                         `
                         myMovieDiv.append(netflixDiv)
 
-                        const likeBtn = document.querySelector('.like-btn')
-                        const dislikeBtn = document.querySelector('.dislike-btn')
-                        const deleteBtn = document.querySelector('.delete-btn')
+                        const likeBtn = netflixDiv.querySelector('.like-btn')
+                        const dislikeBtn = netflixDiv.querySelector('.dislike-btn')
+                        const deleteBtn = netflixDiv.querySelector('.delete-btn')
 
-                        likeBtn.addEventListener('click', event => {
+                        document.addEventListener('click', event => {
+                            if (event.target.className === 'like-btn') {
+                                console.log(event.target.parentNode)
                             const likes = parseInt(userMovie.movie.likes) + 1
                             fetch(`http://localhost:3000/movies/${event.target.parentNode.dataset.id}`, {
                                 method: "PATCH",
@@ -49,12 +51,13 @@ function renderProfile(profileId) {
                             })
                             .then(response => response.json())
                             .then(movie => {
-                                const likeTag = document.querySelector('p')
-                                likeTag.textContent = `Likes: ${movie.likes}`
-                            })
-                        })
+                                const likeTag = event.target.parentNode.querySelector('p')
+                                likeTag.textContent = movie.likes
+                            })}
+                    })
 
-                        dislikeBtn.addEventListener('click', event => {
+                        document.addEventListener('click', event => {
+                            if (event.target.className === 'dislike-btn') {
                             const dislikes = parseInt(userMovie.movie.dislikes) + 1
                             fetch(`http://localhost:3000/movies/${event.target.parentNode.dataset.id}`, {
                                 method: "PATCH",
@@ -67,10 +70,11 @@ function renderProfile(profileId) {
                             .then(movie => {
                                 const dislikeTag = document.querySelector('span')
                                 dislikeTag.textContent = `Dislikes: ${movie.dislikes}`
-                            })
+                            })}
                         })
 
-                        deleteBtn.addEventListener('click', event => {
+                        document.addEventListener('click', event => {
+                            if (event.target.className === 'delete-btn') {
                             const cardDiv = event.target.parentNode
                             fetch(`http://localhost:3000/user_movies/${userMovie.id}`, {
                                 method: "DELETE",
@@ -79,7 +83,7 @@ function renderProfile(profileId) {
                                 }})
                                 .then(response => response.json())
                                 .then(data => cardDiv.remove())
-                        })
+                        }})
                     }
                 })
 
@@ -181,24 +185,26 @@ function renderProfile(profileId) {
 
             })
         }
-        
-        // userHash.user_movies.forEach(userMovie => { 
-        //     if (userMovie.movie.netflix == true ) {
-        //     console.log(userMovie.movie.title)
-        // }})
     })
 }
 
-function renderMovies() {
+function getAllMovies() {
     fetch('http://localhost:3000/movies')
     .then(response => response.json())
     .then(movieArray => {
+        movies = movieArray
+    })
+}
+function renderMovies(movieArray) {
+    myMovieDiv.innerHTML = ""
         movieArray.forEach(movie => {
             renderMovie(movie)
         })
-    })
 }
-
+searchForm.addEventListener('input', event => {
+    const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(event.target.value.toLowerCase()))
+    renderMovies(filteredMovies)
+})
 function renderMovie(movie) {
     const div = document.createElement('div')
     div.classList.add('moviecard')
@@ -206,16 +212,14 @@ function renderMovie(movie) {
     div.innerHTML = `<h2>${movie.title}</h2> 
     <img src= "${movie.image}">`
 
-    const moviediv = document.querySelector('div#movie-card-collection')
-    moviediv.append(div)
+    myMovieDiv.append(div)
 }
 
-function likeClick(likeButton) {
-    likeButton.addEventListener('click', event => {
-    console.log(event.target.dataset.id)
-    // fetch(`http://localhost:3000/movies/${event.target.dataset.id}`)
-    })
-}
 renderProfile(profileId)
-// renderMovies()
-// ❤️ 👎 ❌
+getAllMovies()
+// function likeClick(likeButton) {
+//     likeButton.addEventListener('click', event => {
+//     console.log(event.target.dataset.id)
+
+//     })
+// }
