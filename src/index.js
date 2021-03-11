@@ -297,14 +297,14 @@ function renderMyMovies(movieArray){
     myMovieDiv.innerHTML = ""
     movieArray.forEach(film =>{
         const filmDiv = document.createElement('div')
-        filmDiv.dataset.id = film.id
+        filmDiv.dataset.id = film.movie.id
         filmDiv.classList.add('filmcard')
         filmDiv.innerHTML =`<h2> ${film.movie.title} </h2>
         <h3> Year Released: ${film.movie.year} </h3>
         <img src ="${film.movie.image}">
         <p class= "likes"> ${film.movie.likes}</p>
         <button class="like-btn">❤️</button>
-        <p class= "dislikes"> Dislikes: ${film.movie.dislikes}</p>
+        <p class= "dislikes"> ${film.movie.dislikes}</p>
         <button class= "dislike-btn">👎🏾</button>
         <button class= "delete-btn">✖️</button>`
         myMovieDiv.append(filmDiv)  
@@ -361,7 +361,7 @@ myMovieDiv.addEventListener('click', event => {
     else if(event.target.className === "like-btn") {
         const currentLikes = currentMovie.querySelector('p.likes')
         const updateLikes = parseInt(currentLikes.innerText) + 1
-        fetch(`http://localhost:3000/user_movies/${currentMovie.dataset.id}`, {
+        fetch(`http://localhost:3000/movies/${currentMovie.dataset.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type":"application/json"
@@ -372,6 +372,24 @@ myMovieDiv.addEventListener('click', event => {
         .then(updateMovieLikes => {
             currentLikes.textContent = updateMovieLikes.likes
         })
+    }
+    else if(event.target.className === "dislike-btn") {
+        const currentDislikes = currentMovie.querySelector('p.dislikes')
+        const updateDislikes = parseInt(currentDislikes.innerText) + 1
+        fetch(`http://localhost:3000/movies/${currentMovie.dataset.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({dislikes: updateDislikes}),
+        })
+        .then(response => response.json())
+        .then(updateMovieDislikes => {
+            currentDislikes.textContent = updateMovieDislikes.dislikes
+        })
+    }
+    else if(event.target.className === "delete-btn") {
+        
     }
 })
 
