@@ -24,17 +24,24 @@ h1 {
   margin: 1rem 2rem;
 }
 
-.moviecard img {
+.filmcard img {
   width: 13rem;
   height: 10rem;
   margin: auto;
   font-family: sans-serif;
 }
 
-#movie-card-collection img {
+img.logo {
+  width: 4rem;
+  height: 4rem;
+  margin-right: auto;
+}
+
+img.movie-image {
   width: 13rem;
   height: 10rem;
   margin: auto;
+  font-family: sans-serif;
 }
 
 input[type="text"], button{
