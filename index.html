@@ -10,13 +10,25 @@
       <h1> Profile </h1>
     </header>  
 
-    <form id="movie-search-form" class="" action="" method="">
-      <input id="movie-search-input" type="text" name="">
-    </form>
-
-    <h1> My Watch List </h1>
-      <div id="movie-card-collection">
+    <form class="form" id="login">
+      <h1 class="form-title">Login</h1>
+      <div class="form-input-group">
+          <input type="text" class="form-input" placeholder="Username or email">
       </div>
-      <script type="text/javascript" src="src/index.js" defer></script>
+      <div class="form-input-group">
+          <input type="password" class="form-input" placeholder="Password">
+      </div>
+      <button class="form-button" type="submit">Log In</button>
+  </form>
+
+  <form id="movie-search-form" class="" action="" method="">
+    <h1 class="search-form-title">Search for a Movie</h1>
+      <input id="movie-search-input" type="text" name="">
+  </form>
+
+  <h1> My Watch List </h1>
+    <div id="movie-card-collection">
+    </div>
+    <script type="text/javascript" src="src/index.js" defer></script>
   </body>
 </html>
