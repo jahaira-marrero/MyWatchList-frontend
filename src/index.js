@@ -1,6 +1,6 @@
 const header = document.querySelector('header')
 const headerName = header.querySelector('h1')
-const profileId = 2
+const profileId = 1
 const myMovieDiv = document.querySelector('div#movie-card-collection')
 let movies = []
 let myMovies = []
@@ -211,7 +211,8 @@ function renderMovie(movie) {
     div.classList.add('moviecard')
     div.dataset.id = movie.id
     div.innerHTML = `<h2>${movie.title}</h2> 
-    <img src= "${movie.image}">`
+    <img src= "${movie.image}">
+    <button class= "addBtn"> Add to list</button>`
 
     myMovieDiv.append(div)
 }
@@ -307,6 +308,53 @@ function renderMyMovies(movieArray){
         myMovieDiv.append(filmDiv)  
     })
 }
+
+// click to load my stream movies
+header.addEventListener('click', event => {
+    myMovieDiv.innerHTML = ""
+    if(event.target.dataset.id == 1) {
+        const netflixMovies = myMovies.filter(userMovie => userMovie.movie.netflix)
+        renderMyMovies(netflixMovies)
+        }
+    else if(event.target.dataset.id == 2) {
+        const huluMovies = myMovies.filter(userMovie => userMovie.movie.hulu)
+        renderMyMovies(huluMovies) 
+        }
+    else if(event.target.dataset.id == 3) {
+        const hboMovies = myMovies.filter(userMovie => userMovie.movie.hbo)
+        renderMyMovies(hboMovies) 
+        }
+    else if(event.target.dataset.id == 4) {
+        const disneyMovies = myMovies.filter(userMovie => userMovie.movie.disney)
+        renderMyMovies(disneyMovies) 
+        }
+    else if(event.target.dataset.id == 5) {
+        const amazonMovies = myMovies.filter(userMovie => userMovie.movie.amazon)
+        renderMyMovies(amazonMovies) 
+        }
+})
+
+// click to add move to watch list
+myMovieDiv.addEventListener('click', event => {
+    event.preventDefault()
+    if(event.target.className === "addBtn") {
+        const currentMovie = event.target.closest('div')
+        const addMovieObject = {
+            user_id: profileId,
+            movie_id: currentMovie.dataset.id
+        }
+        fetch('http://localhost:3000/user_movies', {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(addMovieObject),
+        })
+        .then(response => response.json())
+        .then(movieObject => {myMovies.push(movieObject)
+        })
+    }
+})
 
 renderMyProfile()
 // accessMyMovies()
