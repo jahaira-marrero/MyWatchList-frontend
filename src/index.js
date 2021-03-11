@@ -2,14 +2,16 @@ const header = document.querySelector('header')
 const profileId = 2
 const headerName = header.querySelector('h1')
 const myMovieDiv = document.querySelector('div#movie-card-collection')
+const ul = document.querySelector('ul')
 let netflixLogo = document.createElement('img')
 let huluLogo = document.createElement('img')
 let hboLogo = document.createElement('img')
 let disneyLogo = document.createElement('img')
 let amazonLogo = document.createElement('img')
 
-    function renderProfile(profileId) {
-        fetch(`http://localhost:3000/users/${profileId}`)
+
+function renderProfile(profileId) {
+    fetch(`http://localhost:3000/users/${profileId}`)
         .then(response => response.json())
         .then(userHash => {
             headerName.innerText = `Profile: ${userHash.username}`
@@ -60,10 +62,10 @@ let amazonLogo = document.createElement('img')
     
 
 
-    renderProfile(profileId)
+
     // console.log('DOM fully loaded and parsed');
 
-const ul = document.querySelector('ul')
+
 
 
 
@@ -132,7 +134,7 @@ function renderMovie(movie) {
 
 // })
 
-function renderMyNetflix()
 
+renderProfile(profileId)
 // renderMovies()
 
