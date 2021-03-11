@@ -302,7 +302,7 @@ function renderMyMovies(movieArray){
         filmDiv.innerHTML =`<h2> ${film.movie.title} </h2>
         <h3> Year Released: ${film.movie.year} </h3>
         <img src ="${film.movie.image}">
-        <p class= "likes"> Likes: ${film.movie.likes}</p>
+        <p class= "likes"> ${film.movie.likes}</p>
         <button class="like-btn">❤️</button>
         <p class= "dislikes"> Dislikes: ${film.movie.dislikes}</p>
         <button class= "dislike-btn">👎🏾</button>
@@ -336,11 +336,11 @@ header.addEventListener('click', event => {
         }
 })
 
-// click to add move to watch list
+// click to add move to watch list, like, dislike, and delete the movie from list
 myMovieDiv.addEventListener('click', event => {
     event.preventDefault()
+    const currentMovie = event.target.closest('div')
     if(event.target.className === "addBtn") {
-        const currentMovie = event.target.closest('div')
         const addMovieObject = {
             user_id: profileId,
             movie_id: currentMovie.dataset.id
@@ -354,9 +354,27 @@ myMovieDiv.addEventListener('click', event => {
         })
         .then(response => response.json())
         .then(movieObject => {myMovies.push(movieObject)
+            alert("Your movie has been added.")
+            currentMovie.remove()
+        })
+    }
+    else if(event.target.className === "like-btn") {
+        const currentLikes = currentMovie.querySelector('p.likes')
+        const updateLikes = parseInt(currentLikes.innerText) + 1
+        fetch(`http://localhost:3000/user_movies/${currentMovie.dataset.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({likes: updateLikes}),
+        })
+        .then(response => response.json())
+        .then(updateMovieLikes => {
+            currentLikes.textContent = updateMovieLikes.likes
         })
     }
 })
+
 
 renderMyProfile()
 getAllMovies()
