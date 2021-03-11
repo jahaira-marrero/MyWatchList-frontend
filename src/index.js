@@ -306,7 +306,7 @@ function renderMyMovies(movieArray){
         <button class="like-btn">❤️</button>
         <p class= "dislikes"> ${film.movie.dislikes}</p>
         <button class= "dislike-btn">👎🏾</button>
-        <button class= "delete-btn">✖️</button>`
+        <button data-id= "${film.id}" class= "delete-btn">✖️</button>`
         myMovieDiv.append(filmDiv)  
     })
 }
@@ -371,6 +371,7 @@ myMovieDiv.addEventListener('click', event => {
         .then(response => response.json())
         .then(updateMovieLikes => {
             currentLikes.textContent = updateMovieLikes.likes
+            changeMyMovies(updateMovieLikes, updateMovieLikes.likes)
         })
     }
     else if(event.target.className === "dislike-btn") {
@@ -386,13 +387,39 @@ myMovieDiv.addEventListener('click', event => {
         .then(response => response.json())
         .then(updateMovieDislikes => {
             currentDislikes.textContent = updateMovieDislikes.dislikes
+            changeMyMovies(updateMovieDislikes, updateMovieDislikes.dislikes)
         })
     }
     else if(event.target.className === "delete-btn") {
-        
+        const deleteId = currentMovie.querySelector('.delete-btn')
+        console.log(deleteId)
+        const deleteMovie = parseInt(deleteId.dataset.id)
+        fetch(`http://localhost:3000/user_movies/${deleteMovie}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(deletedMovie => {
+            alert("This movie has been removed from your list.")
+            currentMovie.remove()
+        })
     }
 })
 
+function changeMyMovies(movie, value) {
+    for (const i in myMovies) {
+        if (myMovies[i].movie.title == movie.title) {
+            myMovies[i].movie.likes = value
+            break;
+        }
+        else if (myMovies[i].movie.title == movie.title) {
+            myMovies[i].movie.dislikes = value
+            break;
+        }
+    }
+}
 
 renderMyProfile()
 getAllMovies()
