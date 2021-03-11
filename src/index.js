@@ -226,6 +226,7 @@ function renderMyProfile() {
     .then(userHash => {
         headerName.innerText = `Profile: ${userHash.username}`
         renderUserLogos()
+        getAllMovies()
         accessMyMovies()
         renderMyMovies(myMovies)
     })
@@ -371,7 +372,7 @@ myMovieDiv.addEventListener('click', event => {
         .then(response => response.json())
         .then(updateMovieLikes => {
             currentLikes.textContent = updateMovieLikes.likes
-            changeMyMovies(updateMovieLikes, updateMovieLikes.likes)
+            changeMyMoviesLikes(updateMovieLikes, updateMovieLikes.likes)
         })
     }
     else if(event.target.className === "dislike-btn") {
@@ -387,7 +388,7 @@ myMovieDiv.addEventListener('click', event => {
         .then(response => response.json())
         .then(updateMovieDislikes => {
             currentDislikes.textContent = updateMovieDislikes.dislikes
-            changeMyMovies(updateMovieDislikes, updateMovieDislikes.dislikes)
+            changeMyMoviesDislikes(updateMovieDislikes, updateMovieDislikes.dislikes)
         })
     }
     else if(event.target.className === "delete-btn") {
@@ -404,22 +405,40 @@ myMovieDiv.addEventListener('click', event => {
         .then(deletedMovie => {
             alert("This movie has been removed from your list.")
             currentMovie.remove()
+            changeMyMoviesDelete(deletedMovie)
+
         })
     }
 })
 
-function changeMyMovies(movie, value) {
+function changeMyMoviesLikes(movie, value) {
     for (const i in myMovies) {
         if (myMovies[i].movie.title == movie.title) {
             myMovies[i].movie.likes = value
             break;
         }
-        else if (myMovies[i].movie.title == movie.title) {
+    }
+}
+
+function changeMyMoviesDislikes(movie, value) {
+    for (const i in myMovies) {
+        if (myMovies[i].movie.title == movie.title) {
             myMovies[i].movie.dislikes = value
             break;
         }
     }
 }
 
+function changeMyMoviesDelete(movie) {
+    for (const i in myMovies) {
+        if (myMovies[i].id == movie.id) {
+            myMovies.splice(i, 1)
+            break;
+        }
+    }
+}
 renderMyProfile()
 getAllMovies()
+accessMyMovies()
+renderMyMovies(myMovies)
+
