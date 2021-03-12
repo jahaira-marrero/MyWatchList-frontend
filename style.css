@@ -96,13 +96,29 @@ h1.user-home-page {
   box-shadow: 3px 4px #e04b52
 }
 
-.filmcard button {
-  width: 3rem;
+.filmcard h3 {
+  height: 20px
 }
 
-.filmcard p {
+.changes {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.changes button {
+  width: 3rem;
+  padding-top: 5px;
+}
+
+p.likes {
   width: 2rem;
   height: 1rem;
+}
+
+p.dislikes {
+  width: 2rem;
+  height: 1rem;
+  color: antiquewhite;
 }
 
 .filmcard img {
