@@ -8,6 +8,7 @@ const searchForm = document.querySelector('form#movie-search-form')
 const loginForm = document.querySelector('form#login')
 const hiddenTags = document.querySelectorAll('.hidden-before-login')
 const allLogosDiv = document.querySelector('.logos')
+let watchListName
 let movies = []
 let myMovies = []
 
@@ -148,7 +149,7 @@ function renderMyMovies(movieArray){
         filmDiv.classList.add('filmcard')
         filmDiv.innerHTML =`<h2> ${film.movie.title} </h2>
         <h3> Year Released: ${film.movie.year} </h3>
-        <img src ="${film.movie.image}">
+        <img src ="${film.movie.image}" alt="${film .title}">
         <p class= "likes"> ${film.movie.likes}</p><button class="like-btn">❤️</button>
         <p class= "dislikes"> ${film.movie.dislikes}</p><button class= "dislike-btn">👎🏾</button>
         <button data-id= "${film.id}" class= "delete-btn">✖️</button>`
@@ -191,36 +192,69 @@ function changeMyMoviesDelete(movie) {
 // click to load my stream movies
 header.addEventListener('click', event => {
     myMovieDiv.innerHTML = ""
+    const watchListName = document.querySelector('h1.user-home-page')
     if(event.target.dataset.id == 1) {
         const netflixMovies = myMovies.filter(userMovie => userMovie.movie.netflix)
-        renderMyMovies(netflixMovies)
+        watchListName.textContent = "My Netflix List"
+        if (netflixMovies === undefined || netflixMovies.length === 0) {
+            myMovieDiv.innerHTML = `<h4 class="no-movies">You have no movies on Netflix.<h4>`
         }
+        else {
+        renderMyMovies(netflixMovies)
+    }}
     else if(event.target.dataset.id == 2) {
         const huluMovies = myMovies.filter(userMovie => userMovie.movie.hulu)
-        renderMyMovies(huluMovies) 
+        watchListName.innerText = "My Hulu List"
+        if (huluMovies === undefined || huluMovies.length === 0) {
+            myMovieDiv.innerHTML = `<h4 class="no-movies">You have no movies on Hulu.<h4>`
         }
+        else {
+        renderMyMovies(huluMovies) 
+    }}
     else if(event.target.dataset.id == 3) {
         const hboMovies = myMovies.filter(userMovie => userMovie.movie.hbo)
-        renderMyMovies(hboMovies) 
+        watchListName.innerText = "My HBO List"
+        if (hboMovies === undefined || hboMovies.length === 0) {
+            myMovieDiv.innerHTML = `<h4 class="no-movies">You have no movies on HBO Max.<h4>`
         }
+        else {
+        renderMyMovies(hboMovies) 
+    }}
     else if(event.target.dataset.id == 4) {
         const disneyMovies = myMovies.filter(userMovie => userMovie.movie.disney)
-        renderMyMovies(disneyMovies) 
+        watchListName.innerText = "My Disney List"
+        if (disneyMovies === undefined || disneyMovies.length === 0) {
+            myMovieDiv.innerHTML = `<h4 class="no-movies">You have no movies on Disney +.<h4>`
         }
+        else {
+        renderMyMovies(disneyMovies) 
+    }}
     else if(event.target.dataset.id == 5) {
         const amazonMovies = myMovies.filter(userMovie => userMovie.movie.amazon)
-        renderMyMovies(amazonMovies) 
+        watchListName.innerText = "My Amazon Video List"
+        if (amazonMovies === undefined || amazonMovies.length === 0) {
+            myMovieDiv.innerHTML = `<h4 class="no-movies">You have no movies on Amazon Video.<h4>`
         }
+        else {
+        renderMyMovies(amazonMovies) 
+    }}
     else {
+        watchListName.innerText = "My Watch List"
         renderMyMovies(myMovies)
     }
 })
 
 // search more from our database
 searchForm.addEventListener('input', event => {
+    const watchListName = document.querySelector('h1.user-home-page')
+    watchListName.innerText = "Movies In Our Database"
     const filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(event.target.value.toLowerCase()))
+    if (filteredMovies === undefined || filteredMovies.length === 0) {
+        myMovieDiv.innerHTML = `<h4 class="no-movies">Sorry, there are no movies with that name in our database.<h4>`
+    }
+    else {
     renderMovies(filteredMovies)
-})
+}})
 
 // click to add move to watch list, like, dislike, and delete the movie from list
 myMovieDiv.addEventListener('click', event => {
@@ -278,7 +312,6 @@ myMovieDiv.addEventListener('click', event => {
     }
     else if(event.target.className === "delete-btn") {
         const deleteId = currentMovie.querySelector('.delete-btn')
-        console.log(deleteId)
         const deleteMovie = parseInt(deleteId.dataset.id)
         fetch(`http://localhost:3000/user_movies/${deleteMovie}`, {
             method: "DELETE",
