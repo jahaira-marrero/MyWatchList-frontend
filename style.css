@@ -1,6 +1,25 @@
+
+body {
+  background-image: url("https://external-preview.redd.it/ZIrWK2tOf_72YVnwjqyMGiiEiU3PVLNjPyObWDq1gd0.jpg?auto=webp&s=c7922a2f88dea4d22bdaa17a8fcaad3a62661070") ;
+}
+
+.logos img {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  border-radius: 25px;
+  border: 2px solid #73AD21;
+  width: 200px;
+  height: 150px;
+  }
+
+
+
 h1 {
   height: 5vh;
-  background: rgb(159, 190, 224);
+  background: rgb(254, 254, 255);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -10,10 +29,12 @@ h1 {
 
 .moviecard {
     text-align: center;
+    font-family: sans-serif;
+    background-color: rgba(255, 255, 255, 0.851);
     border: grey solid 1px;
     padding: 1rem;
     width: 15rem;
-    height: 15rem;
+    height: 20rem;
     display: inline-grid;
     margin: 1rem 2rem;
     box-shadow: 3px 4px #e04b52
@@ -21,6 +42,7 @@ h1 {
 
 .filmcard {
   display: inline-grid;
+  font-family: sans-serif;
   margin: 1rem 2rem;
 }
 
@@ -28,18 +50,24 @@ h1 {
   width: 13rem;
   height: 10rem;
   margin: auto;
+  background-color: whitesmoke;
   font-family: sans-serif;
 }
 
 img.logo {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
   margin-right: auto;
+  margin-left: auto;
+  border:black;
+  border-radius: 6px;
 }
 
 img.movie-image {
   width: 13rem;
   height: 10rem;
+  background-color: whitesmoke;
   margin: auto;
   font-family: sans-serif;
 }

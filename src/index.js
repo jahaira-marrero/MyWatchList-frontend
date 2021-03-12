@@ -54,8 +54,9 @@ function renderMovie(movie) {
     div.dataset.id = movie.id
     div.innerHTML = `<h2>${movie.title}</h2> 
     <img class= "movie-image" src= "${movie.image}" alt="${movie.title}">
-    <button class= "addBtn"> Add to list</button>
     <img class= "logo" src="${whatMovie(movie)}">
+    <button class= "addBtn"> Add to list</button>
+    
     `
 
     myMovieDiv.append(div)
@@ -148,10 +149,8 @@ function renderMyMovies(movieArray){
         filmDiv.innerHTML =`<h2> ${film.movie.title} </h2>
         <h3> Year Released: ${film.movie.year} </h3>
         <img src ="${film.movie.image}">
-        <p class= "likes"> ${film.movie.likes}</p>
-        <button class="like-btn">❤️</button>
-        <p class= "dislikes"> ${film.movie.dislikes}</p>
-        <button class= "dislike-btn">👎🏾</button>
+        <p class= "likes"> ${film.movie.likes}</p><button class="like-btn">❤️</button>
+        <p class= "dislikes"> ${film.movie.dislikes}</p><button class= "dislike-btn">👎🏾</button>
         <button data-id= "${film.id}" class= "delete-btn">✖️</button>`
         myMovieDiv.append(filmDiv)  
     })
