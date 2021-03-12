@@ -49,6 +49,7 @@ function whatMovie(movie) {
         return 'https://apprecs.org/ios/images/app-icons/256/e5/545519333.jpg'
     }
 }
+
 // Creates movie div card for searched movies
 function renderMovie(movie) {
     const div = document.createElement('div')
@@ -68,10 +69,14 @@ function renderMyProfile() {
     fetch(`http://localhost:3000/users/${profileId}`)
     .then(response => response.json())
     .then(userHash => {
-        headerName.innerText = `Profile: ${userHash.username}`
+        headerName.innerHTML = `Profile: ${userHash.username}`
         allLogosDiv.className = 'after-login'
         hiddenTags.forEach(tag => {tag.className = 'user-home-page'})
-
+        const signOut = document.createElement('form')
+        signOut.className = 'sign-out'
+        signOut.innerHTML = `<button class="sign-out-btn" type="submit">Sign Out </button>`
+        header.append(signOut)
+        
         renderUserLogos()
         getAllMovies()
         accessMyMovies()
@@ -348,8 +353,3 @@ loginForm.addEventListener('submit', event => {
         event.target.reset()
     })
 })
-/********** Calling Functions **********/
-
-// renderMyProfile()
-// getAllMovies()
-// accessMyMovies()
