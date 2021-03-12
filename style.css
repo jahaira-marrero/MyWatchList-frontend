@@ -3,35 +3,77 @@ body {
   background-image: url("https://external-preview.redd.it/ZIrWK2tOf_72YVnwjqyMGiiEiU3PVLNjPyObWDq1gd0.jpg?auto=webp&s=c7922a2f88dea4d22bdaa17a8fcaad3a62661070") ;
 }
 
-.logos img {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 4px;
-  grid-row-gap: 4px;
-  border-radius: 25px;
-  border: 2px solid #73AD21;
-  width: 200px;
-  height: 150px;
-  }
-
-
-
-h1 {
-  height: 5vh;
-  background: rgb(254, 254, 255);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding-bottom: 1vh;
+header h1 {
+  color: wheat;
   font-family: sans-serif;
+  font-size: 37px;
+  display: flex;
+}
+
+h1.search-form-title {
+  color: wheat;
+  font-family: sans-serif;
+  font-size: 37px;
+  display: flex;
+}
+
+h1.user-home-page {
+  color: wheat;
+  font-family: sans-serif;
+  font-size: 37px;
+  display: flex;
+}
+
+.logo-collection {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.logo-collection img {
+  border-radius: 25px;
+  border: 2px transparent;
+  width: 295px;
+  height: 240px;
+}
+
+.logos {
+  display: flex;
+  justify-content: space-around
+}
+
+.logos img {
+  border-radius: 25px;
+  border: 2px transparent;
+  width: 265px;
+  height: 200px;
+}
+
+#movie-search-input {
+  width: 38%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background:white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: -200px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .moviecard {
     text-align: center;
     font-family: sans-serif;
-    background-color: rgba(255, 255, 255, 0.851);
-    border: grey solid 1px;
+    background-color: rgb(155, 176, 199);
+    border-radius: 10px;
+    border: grey 2px ;
     padding: 1rem;
     width: 15rem;
     height: 20rem;
@@ -41,9 +83,26 @@ h1 {
 }
 
 .filmcard {
-  display: inline-grid;
+  text-align: center;
   font-family: sans-serif;
+  background-color: rgb(155, 176, 199);
+  border-radius: 10px;
+  border: grey 2px ;
+  padding: 1rem;
+  width: 15rem;
+  height: 20rem;
+  display: inline-grid;
   margin: 1rem 2rem;
+  box-shadow: 3px 4px #e04b52
+}
+
+.filmcard button {
+  width: 3rem;
+}
+
+.filmcard p {
+  width: 2rem;
+  height: 1rem;
 }
 
 .filmcard img {
@@ -72,25 +131,56 @@ img.movie-image {
   font-family: sans-serif;
 }
 
-input[type="text"], button{
-  background-color: rgb(248, 238, 143);
-  color: rgb(10, 10, 10);
-  font-size: 18px;
-  border-radius: 6px;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+h1.form-title{
+  display: flex;
+  justify-content: center;
 }
 
-input[type="text"]{
-  width: 40rem;
-  height: 4vh;
-  font-size: 3vh;
+form.before-login {
+  background-color: #FFFFFF;
+  width: 400px;
+  height: 400px;
+  margin: 8em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
 }
+div.before-login {
+  padding-top: 30px;
+}
+.form-input {
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: -200px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: 'Ubuntu', sans-serif;
+  }
 
-input[type="password"]{
-  width: 20rem;
-  height: 3vh;
-  font-size: 3vh;
-  
+.form-button {
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9C27B0, #E040FB);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  margin-left: 35%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
 }
 
 .hidden-before-login {

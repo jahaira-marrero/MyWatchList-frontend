@@ -1,12 +1,13 @@
 /********** Global Variables **********/
 
 const header = document.querySelector('header')
+const myLogoCollection = document.querySelector('div.logo-collection')
 const headerName = header.querySelector('h1')
 const myMovieDiv = document.querySelector('div#movie-card-collection')
 const searchForm = document.querySelector('form#movie-search-form')
 const loginForm = document.querySelector('form#login')
 const hiddenTags = document.querySelectorAll('.hidden-before-login')
-const allLogosDiv = document.querySelector('.Logos')
+const allLogosDiv = document.querySelector('.logos')
 let movies = []
 let myMovies = []
 
@@ -32,7 +33,7 @@ function renderMovies(movieArray) {
 // Returns the url to a logo of a service
 function whatMovie(movie) {
     if (movie.netflix === true) {
-        return 'https://cdn.iconscout.com/icon/free/png-256/netflix-282224.png'
+        return 'https://midiaresearch.com/storage/uploads/blog/featured/1177/cover_image-1594998634.png'
     }
     else if (movie.hulu === true) {
         return 'https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/bk8cux6dapq8qjzylfaj'
@@ -56,7 +57,6 @@ function renderMovie(movie) {
     <img class= "movie-image" src= "${movie.image}" alt="${movie.title}">
     <img class= "logo" src="${whatMovie(movie)}">
     <button class= "addBtn"> Add to list</button>
-    
     `
 
     myMovieDiv.append(div)
@@ -89,9 +89,9 @@ function renderUserLogos() {
     if (userHash.netflix === true) {
         const netflixLogo = document.createElement('img')
         netflixLogo.dataset.id = 1
-        netflixLogo.src = "https://cdn.iconscout.com/icon/free/png-256/netflix-282224.png"
+        netflixLogo.src = "https://midiaresearch.com/storage/uploads/blog/featured/1177/cover_image-1594998634.png"
         netflixLogo.alt = "Netflix Logo"
-        header.append(netflixLogo)
+        myLogoCollection.append(netflixLogo)
     }
         
     if (userHash.hulu === true) {
@@ -99,14 +99,14 @@ function renderUserLogos() {
         huluLogo.dataset.id = 2
         huluLogo.src = "https://res-2.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/bk8cux6dapq8qjzylfaj"
         huluLogo.alt = "Hulu Logo"
-        header.append(huluLogo)       
+        myLogoCollection.append(huluLogo)       
     }
     if (userHash.hbo === true) {
         const hboLogo = document.createElement('img')
         hboLogo.dataset.id = 3
         hboLogo.src = "https://res-3.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco/lr6ntovb8hu36yqscb2c"
         hboLogo.alt = "Hbo Logo"
-        header.append(hboLogo)
+        myLogoCollection.append(hboLogo)
     }
 
     if (userHash.disney === true) {
@@ -114,14 +114,14 @@ function renderUserLogos() {
         disneyLogo.dataset.id = 4
         disneyLogo.src ="https://developer.asustor.com/uploadIcons/0020_999_1591957052_app_icon_Disney_plus_256.png"
         disneyLogo.alt = "Disney Logo"
-        header.append(disneyLogo)
+        myLogoCollection.append(disneyLogo)
     }
     if (userHash.amazon === true) {
         const amazonLogo = document.createElement('img')
         amazonLogo.dataset.id = 5
         amazonLogo.src ="https://apprecs.org/ios/images/app-icons/256/e5/545519333.jpg"
         amazonLogo.alt = "Amazon Logo"
-        header.append(amazonLogo)
+        myLogoCollection.append(amazonLogo)
     }
     })
 }
