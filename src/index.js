@@ -211,6 +211,9 @@ header.addEventListener('click', event => {
         const amazonMovies = myMovies.filter(userMovie => userMovie.movie.amazon)
         renderMyMovies(amazonMovies) 
         }
+    else {
+        renderMyMovies(myMovies)
+    }
 })
 
 // search more from our database
